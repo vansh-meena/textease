@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAXEASE - Income Tax Calculator</title>
+    <link rel="stylesheet" href="incometax.css">
+</head>
+
+<body>
+
+    <h1>Income Tax Calculator</h1>
+
+    <form id="taxForm">
+        <label for="year">Assessment Year:</label>
+        <select name="year" id="year">
+            <option value="">Select Year</option>
+            <option value="2023">2023-24</option>
+            <option value="2022">2022-23</option>
+            <option value="2021">2021-22</option>
+            <option value="2020">2020-21</option>
+        </select>
+        <br><br>
+
+        <label for="age">Age Group:</label>
+        <select name="age" id="age">
+            <option value="">Select</option>
+            <option value=">60">Above 60</option>
+            <option value="<60">Below 60</option>
+        </select>
+        <br><br>
+
+        <label for="salary">Income from Salary (Annual):</label>
+        <input type="text" placeholder="₹ Annual Salary" id="salary">
+        <br><br>
+
+        <label for="regime">Tax Regime:</label>
+        <select name="regime" id="regime">
+            <option value="">Select Regime</option>
+            <option value="old">Old Regime</option>
+            <option value="new">New Regime</option>
+        </select>
+        <br><br>
+
+        <button type="button" id="calculateBtn">Calculate</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        document.querySelector("#calculateBtn").addEventListener("click", () => {
+            const year = parseInt(document.getElementById("year").value);
+            const ageInput = document.getElementById("age").value;
+            let age = ageInput === ">60" ? 60 : 35;
+            const preFormattedIncome = document.getElementById("salary").value;
+            const income = parseFloat(preFormattedIncome.replace(/[^\d.-]/g, ""));
+            const regime = document.getElementById("regime").value;
+
+            if (!year || isNaN(income) || !regime || income <= 0) {
+                alert("Please fill out all fields with valid information.");
+                return;
+            }
+
+            let tax;
+            switch (year) {
+                case 2019:
+                    tax = calculateIncomeTax2019(income, age);
+                    break;
+                case 2020:
+                    tax = calculateIncomeTax2020(income, age);
+                    break;
+                case 2021:
+                    tax = calculateIncomeTax2021(income, age, regime);
+                    break;
+                case 2022:
+                    tax = calculateIncomeTax2022(income, age, regime);
+                    break;
+                case 2023:
+                    tax = calculateIncomeTax2023(income, age, regime);
+                    break;
+                default:
+                    alert("Tax calculation for the selected year is not available.");
+                    return;
+            }
+
+            const resultText =  `The income tax for an individual with an income of ₹${income}, under the ${regime} regime in ${year} is ₹${tax.toFixed(2)}`;
+
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerText = resultText;
+        });
+
+        function calculateIncomeTax2019(income, age) {
+            let tax = 0;
+            if (age < 60) {
+                if (income <= 250000) tax = 0;
+                else if (income <= 500000) tax = (income - 250000) * 0.05;
+                else if (income <= 1000000) tax = 12500 + (income - 500000) * 0.20;
+                else tax = 112500 + (income - 1000000) * 0.30;
+            } else if (age >= 60 && age < 80) {
+                if (income <= 300000) tax = 0;
+                else if (income <= 500000) tax = (income - 300000) * 0.05;
+                else if (income <= 1000000) tax = 10000 + (income - 500000) * 0.20;
+                else tax = 110000 + (income - 1000000) * 0.30;
+            } else {
+                return "Income tax rules for individuals aged 80 years and above are not defined.";
+            }
+            return tax;
+        }
+
+        function calculateIncomeTax2020(income, age) {
+            let tax = 0;
+            if (age < 60) {
+                if (income <= 250000) tax = 0;
+                else if (income <= 500000) tax = (income - 250000) * 0.05;
+                else if (income <= 1000000) tax = 12500 + (income - 500000) * 0.20;
+                else tax = 112500 + (income - 1000000) * 0.30;
+            } else if (age >= 60 && age < 80) {
+                if (income <= 300000) tax = 0;
+                else if (income <= 500000) tax = (income - 300000) * 0.05;
+                else if (income <= 1000000) tax = 10000 + (income - 500000) * 0.20;
+                else tax = 110000 + (income - 1000000) * 0.30;
+            } else {
+                return "Income tax rules for individuals aged 80 years and above are not defined.";
+            }
+            return tax;
+        }
+
+        function calculateIncomeTax2021(income, age, regime = "existing") {
+            let tax = 0;
+            if (regime === "existing") {
+                if (age < 60) {
+                    if (income <= 250000) tax = 0;
+                    else if (income <= 500000) tax = (income - 250000) * 0.05;
+                    else if (income <= 1000000) tax = 12500 + (income - 500000) * 0.20;
+                    else tax = 112500 + (income - 1000000) * 0.30;
+                } else if (age >= 60 && age < 80) {
+                    if (income <= 300000) tax = 0;
+                    else if (income <= 500000) tax = (income - 300000) * 0.05;
+                    else if (income <= 1000000) tax = 10000 + (income - 500000) * 0.20;
+                    else tax = 110000 + (income - 1000000) * 0.30;
+                }
+            } else if (regime === "new") {
+                if (income <= 250000) tax = 0;
+                else if (income <= 500000) tax = (income - 250000) * 0.05;
+                else if (income <= 750000) tax = 12500 + (income - 500000) * 0.10;
+                else if (income <= 1000000) tax = 37500 + (income - 750000) * 0.15;
+                else if (income <= 1250000) tax = 75000 + (income - 1000000) * 0.20;
+                else if (income <= 1500000) tax = 125000 + (income - 1250000) * 0.25;
+                else tax = 187500 + (income - 1500000) * 0.30;
+            }
+            return tax;
+        }
+
+        function calculateIncomeTax2022(income, age, regime = "old") {
+            return calculateIncomeTax2021(income, age, regime);
+        }
+
+        function calculateIncomeTax2023(income, age, regime = "old") {
+            return calculateIncomeTax2021(income, age, regime);
+        }
+    </script>
+</body>
+
+</html>

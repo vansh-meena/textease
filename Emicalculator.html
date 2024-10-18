@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAXEASE</title>
+    <link rel="stylesheet" href="emi.css">
+</head>
+
+<body>
+    <center>
+    <footer>
+        <h1>EMI Calculator</h1>
+        <div class="calculator">
+            <form>
+                
+
+                <hr>
+
+                <label for="loanAmount">Loan Amount</label>
+                <input type="text" placeholder="₹" id="loanAmount">
+
+                <hr>
+
+                <label for="downpayment">Down Payment</label>
+                <input type="text" placeholder="₹" id="downpayment">
+
+                <hr>
+
+                <label for="interestRate">Rate of Interest</label>
+                <input type="text" placeholder="%" id="interestRate">
+
+                <hr>
+
+                <label for="loanTenure">Loan Term</label>
+                <input type="text" placeholder="Years" id="loanTenure">
+            </form>
+            <hr>
+            <button onclick="calculateEMI()">Calculate</button>
+            <h4 id="result"></h4>
+        </div>
+    </footer>
+</center>
+    <script src="emi.js"></script>
+</body>
+
+</html>

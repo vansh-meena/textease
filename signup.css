@@ -1,0 +1,133 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: rgb(2,0,36);
+    background-color:rgb(124, 173, 124);
+    /*background: linear-gradient(90deg,background-image:url("signuplogo.png") #f6f6f6 54%);*/
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background: white;
+    border-radius: 15px;
+    border-color:solid black;
+    box-shadow: 20px 20px 30px rgb(0, 0, 0);
+    width: 400px;
+    padding: 80px;
+    margin-right: 40px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-toggle {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#signup-btn{
+margin-left:40px;
+}
+
+.toggle-btn {
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+    margin-right:80px ;
+
+}
+
+.toggle-btn:hover {
+    color: #6e7ff3;
+}
+
+.form {
+    display: none;
+}
+
+.form.active {
+    display: block;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #6e7ff3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+     transition: background 0.3s;
+}
+
+button:hover {
+    background: #5b6ae0;
+}
+
+p {
+    text-align: center;
+}
+
+span {
+    color: #6e7ff3;
+    cursor: pointer;
+}
+.text-container {
+    text-align: center;
+    padding-right: 170px;
+}
+
+.welcome-text {
+    font-size: 2.5rem;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: fadeIn 2s forwards;
+    color:white;
+    margin-left:50px;
+
+    }
+
+.spiky {
+    color:black;
+    animation: spikyAnim 1.5s infinite alternate;
+}
+
+.ready-text {
+    font-size: 1.2rem;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    animation: fadeIn 2s forwards 2s; 
+    color:white;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spikyAnim {
+    0% {
+        text-shadow: 0 0 5px #ff8d1b, 0 0 10px #dba719, 0 0 15px #e3940b;
+    }
+    100% {
+        text-shadow: 0 0 20px #e2b221, 0 0 30px #ff6811, 0 0 40px #b51818;
+    }
+}
